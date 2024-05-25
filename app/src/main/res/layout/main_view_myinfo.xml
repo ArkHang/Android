@@ -1,0 +1,74 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:id="@+id/my_info_view_container">
+
+    <LinearLayout
+        android:id="@+id/ll_head"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_head_icon"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="75dp"
+            android:src="@drawable/default_icon" />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击登录"
+            android:layout_gravity="center_horizontal"
+            android:padding="16dp"
+            android:textSize="18sp"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+
+    <View
+        style="@style/vMyinfoStyle"
+        android:layout_marginTop="20dp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_course_history"
+        style="@style/rlMyinfoStyle">
+
+        <ImageView
+            android:id="@+id/iv_course_historyicon"
+            style="@style/ivMyinfoLeftStyle"
+            android:src="@drawable/course_history_icon" />
+
+        <TextView
+            style="@style/tvMyinfoStyle"
+            android:layout_toRightOf="@id/iv_course_historyicon"
+            android:text="播放记录" />
+
+        <ImageView style="@style/ivMyinfoRightStyle" />
+    </RelativeLayout>
+
+    <View style="@style/vMyinfoStyle" />
+
+    <RelativeLayout
+        android:id="@+id/rl_setting"
+        style="@style/rlMyinfoStyle">
+
+        <ImageView
+            android:id="@+id/iv_userinfo_icon"
+            style="@style/ivMyinfoLeftStyle"
+            android:src="@drawable/myinfo_setting_icon" />
+
+        <TextView
+            style="@style/tvMyinfoStyle"
+            android:layout_toRightOf="@id/iv_userinfo_icon"
+            android:text="设置" />
+
+        <ImageView style="@style/ivMyinfoRightStyle" />
+    </RelativeLayout>
+</LinearLayout>

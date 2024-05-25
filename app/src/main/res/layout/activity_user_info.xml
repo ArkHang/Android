@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/main_title_bar" />
+
+    <!-- 头像 -->
+    <RelativeLayout
+        android:id="@+id/rl_head"
+        style="@style/rlUserInfoStyle">
+        <TextView
+            style="@style/tvUserInfoStyle"
+            android:text="头 像" />
+        <ImageView
+            android:id="@+id/iv_head_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/default_icon" />
+    </RelativeLayout>
+    <View style="@style/vMyinfoStyle" />
+
+    <!-- 用户名 -->
+    <RelativeLayout
+        android:id="@+id/rl_account"
+        style="@style/rlUserInfoStyle">
+        <TextView
+            style="@style/tvUserInfoStyle"
+            android:text="用户名" />
+        <TextView
+            android:id="@+id/tv_user_name"
+            style="@style/tvValueUserInfoStyle"/>
+    </RelativeLayout>
+    <View style="@style/vMyinfoStyle" />
+
+    <!-- 昵称 -->
+    <RelativeLayout
+        android:id="@+id/rl_nickName"
+        style="@style/rlUserInfoStyle">
+        <TextView
+            style="@style/tvUserInfoStyle"
+            android:text="昵 称" />
+        <TextView
+            android:id="@+id/tv_nickName"
+            style="@style/tvValueUserInfoStyle"/>
+    </RelativeLayout>
+    <View style="@style/vMyinfoStyle" />
+
+    <!-- 性别 -->
+    <RelativeLayout
+        android:id="@+id/rl_sex"
+        style="@style/rlUserInfoStyle">
+        <TextView
+            style="@style/tvUserInfoStyle"
+            android:text="性 别" />
+        <TextView
+            android:id="@+id/tv_sex"
+            style="@style/tvValueUserInfoStyle"/>
+    </RelativeLayout>
+    <View style="@style/vMyinfoStyle" />
+
+    <!-- 签名 -->
+    <RelativeLayout
+        android:id="@+id/rl_signature"
+        style="@style/rlUserInfoStyle">
+        <TextView
+            style="@style/tvUserInfoStyle"
+            android:text="签 名" />
+        <TextView
+            android:id="@+id/tv_signature"
+            style="@style/tvValueUserInfoStyle"/>
+    </RelativeLayout>
+    <View style="@style/vMyinfoStyle" />
+</LinearLayout>

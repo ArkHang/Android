@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#FFFFFF"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/main_title_bar" />
+
+            <FrameLayout
+                android:id="@+id/main_body"
+                android:layout_width="396dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:background="#F2F2F2">
+
+            <RelativeLayout
+                android:id="@+id/bottom_bar_course_btn"
+                style="@style/rlBottomStyle">
+                <TextView
+                    android:id="@+id/bottom_bar_text_course"
+                    style="@style/tvBottomStyle"
+                    android:text="课程" />
+                <ImageView
+                    android:id="@+id/bottom_bar_image_course"
+                    style="@style/ivBottomStyle"
+                    android:src="@drawable/main_course_icon" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/bottom_bar_exercises_btn"
+                style="@style/rlBottomStyle">
+                <TextView
+                    android:id="@+id/bottom_bar_text_exercises"
+                    style="@style/tvBottomStyle"
+                    android:text="习题" />
+                <ImageView
+                    android:id="@+id/bottom_bar_image_exercises"
+                    style="@style/ivBottomStyle"
+                    android:src="@drawable/main_exercises_icon" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/bottom_bar_myinfo_btn"
+                style="@style/rlBottomStyle">
+                <TextView
+                    android:id="@+id/bottom_bar_text_myinfo"
+                    style="@style/tvBottomStyle"
+                    android:text="我" />
+                <ImageView
+                    android:id="@+id/bottom_bar_image_myinfo"
+                    style="@style/ivBottomStyle"
+                    android:src="@drawable/main_my_icon" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="welcome！" />
+
+</LinearLayout>

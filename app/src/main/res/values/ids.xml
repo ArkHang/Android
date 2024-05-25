@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="btn_validate" type="id" />
+    <item name="et_validate_name" type="id" />
+    <item name="tv_save" type="id" />
+</resources>

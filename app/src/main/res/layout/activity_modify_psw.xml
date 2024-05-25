@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/register_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/main_title_bar" />
+
+    <EditText
+        android:id="@+id/et_original_psw"
+        style="@style/etRegisterStyle"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/register_user_name_bg"
+        android:drawableLeft="@drawable/psw_icon"
+        android:hint="请输入原始密码" />
+
+    <EditText
+        android:id="@+id/et_new_psw"
+        style="@style/etRegisterStyle"
+        android:background="@drawable/register_psw_bg"
+        android:drawableLeft="@drawable/psw_icon"
+        android:hint="请输入新密码"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/et_new_psw_again"
+        style="@style/etRegisterStyle"
+        android:background="@drawable/register_psw_again_bg"
+        android:drawableLeft="@drawable/psw_icon"
+        android:hint="请再次输入新密码"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btn_save"
+        style="@style/btnRegisterStyle"
+        android:text="保存" />
+</LinearLayout>
