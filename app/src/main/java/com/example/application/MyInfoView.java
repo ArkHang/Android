@@ -26,13 +26,13 @@ public class MyInfoView implements View.OnClickListener {
     public MyInfoView(Activity context) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
-        mCurrentView = mInflater.inflate(R.layout.main_view_myinfo, null);
 
 
     }
 
     // 初始化界面控件
     private void initView() {
+        mCurrentView = mInflater.inflate(R.layout.main_view_myinfo, null);
         ll_head = mCurrentView.findViewById(R.id.ll_head);
         iv_head_icon = mCurrentView.findViewById(R.id.iv_head_icon);
         rl_course_history = mCurrentView.findViewById(R.id.rl_course_history);
