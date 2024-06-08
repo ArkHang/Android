@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
+
 import com.example.utils.MD5Utils;
 import com.example.utils.UtilsHelper;
 
@@ -95,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         data.putExtra("isLogin", true);
         data.putExtra("userName", userName);
 
-        lMyInfoView.updateUI();
+        //lMyInfoView.updateUI();
         setResult(RESULT_OK, data);
         finish();
     }

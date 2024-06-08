@@ -102,14 +102,24 @@ public class UtilsHelper {
     public static void saveLoginStatus(Context context, boolean status, String userName) {
         SharedPreferences sp = context.getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
+        SQLiteHelper dbHelper = new SQLiteHelper(context);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(SQLiteHelper.U_USERINFO, new String[]{"_id"}, "userName=?", new String[]{userName}, null, null, null);
+        editor.putInt("id",cursor.getInt(cursor.getColumnIndexOrThrow("_id")));
         editor.putBoolean("isLogin", status);
         editor.putString("loginUserName", userName);
         editor.commit();
+    }
+
+    public static Integer readUserId(Context context){
+        SharedPreferences sp = context.getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
+        return sp.getInt("id",0);
     }
     public static boolean readLoginStatus(Context context) {
         SharedPreferences sp = context.getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
         return sp.getBoolean("isLogin", false);
     }
+
 
     public static void clearLoginStatus(Context context) {
         SharedPreferences sp = context.getSharedPreferences("loginInfo", Context.MODE_PRIVATE);

@@ -65,5 +65,6 @@ public class RegisterActivity extends AppCompatActivity {
         userName = et_user_name.getText().toString().trim();
         passWord = et_psw.getText().toString().trim();
         pswAgain = et_psw_again.getText().toString().trim();
+
     }
 }

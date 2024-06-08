@@ -1,6 +1,7 @@
 package com.example.application;
 
-import android.annotation.SuppressLint;
+
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -12,17 +13,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatCallback;
 
+import com.example.application.uploadModel.application.UpLoadView;
+import com.example.application.uploadModel.intentutils.ActivityResultCallback;
 import com.example.utils.UtilsHelper;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ActivityResultCallback {
     private FrameLayout mBodyLayout;
     private LinearLayout mBottomLayout;
-    private View mCourseBtn, mExercisesBtn, mMyInfoBtn;
-    private TextView tv_course, tv_exercises, tv_myInfo;
+    private View mCourseBtn, mExercisesBtn, mMyInfoBtn,uploadBtn;
+    private TextView tv_course, tv_exercises, tv_myInfo,tv_upload;
     private ImageView iv_course, iv_exercises, iv_myInfo;
     private MyInfoView mMyInfoView;
+
+    private UpLoadView upLoadView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +46,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mCourseBtn = findViewById(R.id.bottom_bar_course_btn);
         mExercisesBtn = findViewById(R.id.bottom_bar_exercises_btn);
         mMyInfoBtn = findViewById(R.id.bottom_bar_myinfo_btn);
+        uploadBtn=findViewById(R.id.bottom_bar_upload);
 
         tv_course = findViewById(R.id.bottom_bar_text_course);
         tv_exercises = findViewById(R.id.bottom_bar_text_exercises);
         tv_myInfo = findViewById(R.id.bottom_bar_text_myinfo);
+        tv_upload=findViewById(R.id.bottom_bar_upload1);
 
         iv_course = findViewById(R.id.bottom_bar_image_course);
         iv_exercises = findViewById(R.id.bottom_bar_image_exercises);
@@ -58,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mCourseBtn.setOnClickListener(this);
         mExercisesBtn.setOnClickListener(this);
         mMyInfoBtn.setOnClickListener(this);
+        uploadBtn.setOnClickListener(this);
     }
 
     private void setNotSelectedStatus() {
@@ -92,6 +101,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 iv_myInfo.setImageResource(R.drawable.main_my_icon_selected);
                 tv_myInfo.setTextColor(getColor(R.color.text_color_selected));
                 break;
+            case 3:
+                uploadBtn.setSelected(true);
+                tv_upload.setTextColor(R.drawable.main_course_icon_selected);
+                break;
         }
     }
 
@@ -123,6 +136,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 mMyInfoView.showView();
                 break;
+            case 3:
+                if(upLoadView==null){
+                    upLoadView=new UpLoadView(this,this);
+                    mBodyLayout.addView(upLoadView.getView());
+                }
+                upLoadView.showView();
+                break;
         }
     }
 
@@ -136,6 +156,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             selectDisplayView(1);
         } else if (id == R.id.bottom_bar_myinfo_btn) {
             selectDisplayView(2);
+        } else if (id==R.id.bottom_bar_upload) {
+            selectDisplayView(3);
         }
     }
 
@@ -159,4 +181,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private long exitTime = 0; // For exit timing
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if (upLoadView != null) {
+            upLoadView.handleActivityResult(requestCode, resultCode, data);
+        }
+    }
 }

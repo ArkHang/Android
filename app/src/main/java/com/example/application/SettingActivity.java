@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import com.example.utils.UtilsHelper;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
@@ -60,7 +61,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             setResult(RESULT_OK, data);
 
             data.putExtra("isLogin", false);
-            sMyInfoView.updateUI();
+            //sMyInfoView.updateUI();
             finish();
         }
     }

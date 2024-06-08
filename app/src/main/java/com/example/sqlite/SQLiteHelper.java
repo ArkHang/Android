@@ -9,6 +9,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public static final int DB_VERSION = 2; // 增加版本号
     public static final String U_USERINFO = "userinfo"; // 表名称
 
+    public static final String U_FABUINFO="fabuinfo";
     public SQLiteHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -25,6 +26,16 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 + "security VARCHAR"    // 添加新的列
                 + ")";
         db.execSQL(CREATE_TABLE_USERINFO);
+        String CREATE_TABLE_FABUINFO="CREATE TABLE "+U_FABUINFO+"("
+                +"_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                +"USERID INTEGER,"
+                +"TITLE VARCHAR,"
+                +"KEYS  VARCHAR,"
+                +"TEXT VARCHAR,"
+                +"URI VARCHAR,"
+                +"FOREIGN KEY (USERID) REFERENCES "+U_USERINFO+" (_id)"
+                +")";
+        db.execSQL(CREATE_TABLE_FABUINFO);
     }
 
     @Override
