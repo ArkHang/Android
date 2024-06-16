@@ -2,6 +2,7 @@ package com.example.application.uploadModel.application;
 
 import static androidx.core.app.ActivityCompat.startActivityForResult;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
@@ -130,20 +131,31 @@ public class UpLoadView extends AppCompatActivity implements View.OnClickListene
         String keys = tv_key.getText().toString();
         String text = et_js.getText().toString();
         String str_uri=uri.toString();
-        sqlHelper.saveFaBuInfo(mContext,UtilsHelper.readUserId(mContext),title,keys,text,str_uri);
+        try{
+            sqlHelper.saveFaBuInfo(mContext,UtilsHelper.readUserId(mContext),title,keys,text,str_uri);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 
     private void selectVideo() {
-        Intent intent1 = new Intent(Intent.ACTION_GET_CONTENT);
+        Intent intent1 = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent1.setType("*/*");
         mContext.startActivityForResult(intent1, REQUEST_CODE_VIDEO);
+//
+//        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+//        intent.addCategory(Intent.CATEGORY_OPENABLE);
+//        intent.setType("image/*");
+//        startActivityForResult(intent, REQUEST_CODE_VIDEO);
     }
 
 
+    @SuppressLint("WrongConstant")
     public void handleActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode==REQUEST_CODE_VIDEO&&resultCode==RESULT_OK){
             uri = data.getData();
+
             iv.setImageURI(uri);
         }
 
@@ -151,7 +163,7 @@ public class UpLoadView extends AppCompatActivity implements View.OnClickListene
     private void showKey(ToggleButton button,int index){
         StringBuilder sb=new StringBuilder(tv_key.getText().toString());
        if(!flags[index]){
-           sb.append(button.getTextOn()+" ");
+           sb.append(button.getTextOn()+"  ");
            flags[index]=true;
        }
        else {

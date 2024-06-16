@@ -99,13 +99,19 @@ public class UtilsHelper {
         return null; // 如果没有找到用户，返回 null
     }
 
+    @SuppressLint("Range")
     public static void saveLoginStatus(Context context, boolean status, String userName) {
         SharedPreferences sp = context.getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         SQLiteHelper dbHelper = new SQLiteHelper(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(SQLiteHelper.U_USERINFO, new String[]{"_id"}, "userName=?", new String[]{userName}, null, null, null);
-        editor.putInt("id",cursor.getInt(cursor.getColumnIndexOrThrow("_id")));
+        if (cursor != null && cursor.moveToFirst()) {
+            int id = cursor.getColumnIndex("_id");
+            if (id>-1){
+                editor.putInt("id",cursor.getInt(id));
+            }
+        }
         editor.putBoolean("isLogin", status);
         editor.putString("loginUserName", userName);
         editor.commit();

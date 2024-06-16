@@ -7,7 +7,7 @@ public class FaBuBean {
 
     private String title;
     private String keys;
-    private String text;
+    private String atext;
 
     public Integer get_id() {
         return _id;
@@ -38,7 +38,7 @@ public class FaBuBean {
         this.userId = userId;
         this.title = title;
         this.keys = keys;
-        this.text = text;
+        this.atext = text;
         this.uri = uri;
     }
 
@@ -51,11 +51,11 @@ public class FaBuBean {
     }
 
     public String getText() {
-        return text;
+        return atext;
     }
 
     public void setText(String text) {
-        this.text = text;
+        this.atext = text;
     }
 
     public String getUri() {

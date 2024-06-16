@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    >
+    <include layout="@layout/main_title_bar"></include>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:text="作 者:"
+            android:gravity="center"
+            style="@style/tvUserInfoStyle"
+            ></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/tv_show_author"
+            android:gravity="center"
+            style="@style/tvUserInfoStyle"></TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:text="名 称:"
+            android:gravity="center"
+            style="@style/tvUserInfoStyle"
+           ></TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/tv_show_tittle"
+            style="@style/tvUserInfoStyle"
+            android:gravity="center"></TextView>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:text="关键字:"
+            android:gravity="center"
+            style="@style/tvUserInfoStyle"></TextView>
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tv_show_keys"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"></TextView>
+    </LinearLayout>
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:layout_width="350dp"
+        android:layout_height="170dp"
+        android:id="@+id/iv_show"
+        android:layout_gravity="center"
+        ></ImageView>
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:text="简  述"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        style="@style/tvUserInfoStyle"></TextView>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/tv_show_js"
+    android:scrollbars="vertical"
+    style="@style/tvUserInfoStyle"></TextView>
+
+</LinearLayout>

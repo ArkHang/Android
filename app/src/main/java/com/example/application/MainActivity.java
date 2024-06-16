@@ -2,6 +2,7 @@ package com.example.application;
 
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatCallback;
 
+import com.example.application.showModel.application.ShowView;
 import com.example.application.uploadModel.application.UpLoadView;
 import com.example.application.uploadModel.intentutils.ActivityResultCallback;
 import com.example.utils.UtilsHelper;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView iv_course, iv_exercises, iv_myInfo;
     private MyInfoView mMyInfoView;
 
+    private ShowView showView;
     private UpLoadView upLoadView;
 
     @Override
@@ -124,6 +127,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (viewIndex) {
             case 0:
                 // Load Course View
+                if(showView==null){
+                    showView=new ShowView(this);
+                    mBodyLayout.addView(showView.getView());
+                }
+                showView.showView();
                 break;
             case 1:
                 // Load Exercises View
@@ -182,10 +190,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private long exitTime = 0; // For exit timing
 
+    @SuppressLint("WrongConstant")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
         if (upLoadView != null) {
+            final int takeFlags = data.getFlags()
+                    & (Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            getContentResolver().takePersistableUriPermission(data.getData(), takeFlags);
             upLoadView.handleActivityResult(requestCode, resultCode, data);
         }
     }
