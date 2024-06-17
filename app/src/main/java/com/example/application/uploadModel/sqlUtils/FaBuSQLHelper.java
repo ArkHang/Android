@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class FaBuSQLHelper {
-    public void saveFaBuInfo(Context context,Integer userID,String title,
+    public boolean saveFaBuInfo(Context context,Integer userID,String title,
                                     String keys,String text,String uri){
         SQLiteHelper dbHelper = new SQLiteHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -28,8 +28,9 @@ public class FaBuSQLHelper {
         values.put("atext",text);
         values.put("uri",uri);
 
-        db.insert(SQLiteHelper.U_FABUINFO,null,values);
+        long l = db.insert(SQLiteHelper.U_FABUINFO, null, values);
         db.close();
+        return l>0?true:false;
     }
 
     public  List<FaBuBean> queryFaBuInfo(Context context,String title,String keys){
@@ -46,9 +47,13 @@ public class FaBuSQLHelper {
         if(keys!=null&&!"".equals(keys)){
             String[] s = keys.split(" ");
             List<String> keyList = Arrays.asList(s);
-            String joinSelection = TextUtils.join(", ", Collections.nCopies(keyList.size(), "?"));
-            selection+="AND KEYS IN ("+joinSelection+")";
-            argsList.addAll(keyList);
+            for(int i=0;i<keyList.size();i++){
+                selection+="AND KEYS LIKE ? ";
+                argsList.add("%"+keyList.get(i)+"%");
+            }
+//            String joinSelection = TextUtils.join(", ", Collections.nCopies(keyList.size(), "?"));
+//            selection+="AND KEYS IN ("+joinSelection+")";
+//            argsList.addAll(keyList);
 
         }
 //        selection+="AND KEYS IN (?)";

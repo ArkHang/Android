@@ -93,7 +93,12 @@ public class ShowView extends AppCompatActivity implements View.OnClickListener 
         if (mCurrentView==null){
             initView();
         }
-        mCurrentView.setVisibility(View.VISIBLE);
+        else {
+            List<FaBuBean> newDataLists = sqlHelper.queryFaBuInfo(mContext, "", "");
+            myAdapter.updateDataList(newDataLists);
+            mCurrentView.setVisibility(View.VISIBLE);
+        }
+
     }
 
 

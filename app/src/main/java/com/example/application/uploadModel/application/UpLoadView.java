@@ -45,7 +45,7 @@ public class UpLoadView extends AppCompatActivity implements View.OnClickListene
     private TextView tv_key;
     private LayoutInflater layoutInflater;
 
-    private Button uploadbtn,commitBtn;
+    private Button uploadbtn,commitBtn,canclebtn;
 
     private boolean[] flags=new boolean[8];
 
@@ -79,6 +79,7 @@ public class UpLoadView extends AppCompatActivity implements View.OnClickListene
         tv_key = mCurrentView.findViewById(R.id.tv_keySelected);
         et_js=mCurrentView.findViewById(R.id.et_js);
         uploadbtn=mCurrentView.findViewById(R.id.upload_vedio);
+        canclebtn=mCurrentView.findViewById(R.id.upload_vedio_cancle);
         iv=mCurrentView.findViewById(R.id.iv);
         commitBtn=mCurrentView.findViewById(R.id.commit);
         setListener();
@@ -92,6 +93,7 @@ public class UpLoadView extends AppCompatActivity implements View.OnClickListene
         }
         uploadbtn.setOnClickListener(this);
         commitBtn.setOnClickListener(this);
+        canclebtn.setOnClickListener(this);
 
     }
     public View getView() {
@@ -124,6 +126,10 @@ public class UpLoadView extends AppCompatActivity implements View.OnClickListene
         if (id==R.id.commit){
             uploadInfo();
         }
+        if(id==R.id.upload_vedio_cancle){
+            uri=null;
+            iv.setImageURI(null);
+        }
     }
 
     private void uploadInfo() {
@@ -132,7 +138,22 @@ public class UpLoadView extends AppCompatActivity implements View.OnClickListene
         String text = et_js.getText().toString();
         String str_uri=uri.toString();
         try{
-            sqlHelper.saveFaBuInfo(mContext,UtilsHelper.readUserId(mContext),title,keys,text,str_uri);
+            boolean b = sqlHelper.saveFaBuInfo(mContext, UtilsHelper.readUserId(mContext), title, keys, text, str_uri);
+            if (b){
+                ed_title.setText("");
+                tv_key.setText("");
+                et_js.setText("");
+                uri=null;
+                iv.setImageURI(null);
+                for (int j=0;j< flags.length;j++){
+                    flags[j]=false;
+                }
+                Toast.makeText(mContext,"发布成功",Toast.LENGTH_LONG).show();
+            }
+            else {
+                Toast.makeText(mContext,"发布失败",Toast.LENGTH_LONG).show();
+
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -155,7 +176,6 @@ public class UpLoadView extends AppCompatActivity implements View.OnClickListene
     public void handleActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode==REQUEST_CODE_VIDEO&&resultCode==RESULT_OK){
             uri = data.getData();
-
             iv.setImageURI(uri);
         }
 

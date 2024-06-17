@@ -2,18 +2,17 @@ package com.example.application.showModel.callback;
 
 import androidx.recyclerview.widget.DiffUtil;
 
+import com.example.application.showModel.bean.PingLunBean;
 import com.example.application.uploadModel.bean.FaBuBean;
 
 import java.util.List;
 
-public class MyDiffCallback extends DiffUtil.Callback {
+public class MyPLDiffCallback extends DiffUtil.Callback{
+    private List<PingLunBean> oldDataList;
 
-    private List<FaBuBean> oldDataList;
 
-
-    private List<FaBuBean> newDataList;
-
-    public MyDiffCallback(List<FaBuBean> oldDataList, List<FaBuBean> newDataList) {
+    private List<PingLunBean> newDataList;
+    public MyPLDiffCallback(List<PingLunBean> oldDataList, List<PingLunBean> newDataList) {
         this.oldDataList=oldDataList;
         this.newDataList=newDataList;
     }
@@ -30,7 +29,7 @@ public class MyDiffCallback extends DiffUtil.Callback {
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-       return oldDataList.get(oldItemPosition).get_id().equals(newDataList.get(newItemPosition).get_id());
+        return oldDataList.get(oldItemPosition).get_id().equals(newDataList.get(newItemPosition).get_id());
     }
 
     @Override

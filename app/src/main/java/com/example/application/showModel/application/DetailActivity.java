@@ -11,21 +11,36 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.application.R;
+import com.example.application.showModel.bean.PingLunBean;
+import com.example.application.showModel.callback.MyPLDiffCallback;
+import com.example.application.showModel.sqlUtils.PLSQLHelper;
 import com.example.application.uploadModel.bean.FaBuBean;
 import com.example.application.uploadModel.sqlUtils.FaBuSQLHelper;
+import com.example.utils.UtilsHelper;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class DetailActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -33,9 +48,18 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     private TextView tv_author,tv_tittle,tv_keys,tv_js,tv_back;
     private ImageView iv_show;
 
-    private Integer _id;
+    private Integer _id,userId;
 
+    private Button btn_upload_pl;
+    private EditText et_pl;
+    private RecyclerView show_recyclerView;
+
+    private List<PingLunBean> pllists=new ArrayList<>();
     private FaBuSQLHelper sqlHelper=new FaBuSQLHelper();
+
+    private PLSQLHelper plsqlHelper=new PLSQLHelper();
+
+    private MyAdapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -53,29 +77,25 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         tv_js=findViewById(R.id.tv_show_js);
         tv_back = findViewById(R.id.tv_back);
         iv_show=findViewById(R.id.iv_show);
+        show_recyclerView=findViewById(R.id.show_recyclervoew);
+        et_pl=findViewById(R.id.et_pl);
+        btn_upload_pl=findViewById(R.id.upload_pl);
         FaBuBean fabuBean = sqlHelper.findFaBuInfoByID(this, _id);
+        userId= UtilsHelper.readUserId(this);
         tv_author.setText(sqlHelper.getUserName(this,fabuBean.getUserId()));
         tv_tittle.setText(fabuBean.getTitle());
         tv_keys.setText(fabuBean.getKeys());
         tv_js.setText(fabuBean.getText());
         Uri uri = Uri.parse(fabuBean.getUri());
-//        try {
-//            InputStream inputStream=getContentResolver().openInputStream(uri);
-//            Drawable drawable = Drawable.createFromStream(inputStream, uri.toString());
-//            iv_show.setImageDrawable(drawable);
-//        } catch (FileNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
-//        Bitmap bitmap = BitmapFactory.decodeFile(fabuBean.getUri());
-//        iv_show.setImageBitmap(bitmap);
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-//            // 如果已经有权限，设置图片
-//            iv_show.setImageURI(uri);
-//        } else {
-//            // 请求权限
-//            openDocument();
-//        }
         iv_show.setImageURI(uri);
+        myAdapter=new MyAdapter();
+        List<PingLunBean> pingLunBeans = plsqlHelper.queryPingLun(this, _id);
+        for (PingLunBean bean:pingLunBeans) {
+            pllists.add(bean);
+        }
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        show_recyclerView.setLayoutManager(layoutManager);
+        show_recyclerView.setAdapter(myAdapter);
 
     }
 
@@ -123,6 +143,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     private void setListener(){
         tv_back.setOnClickListener(this);
+        btn_upload_pl.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
@@ -130,5 +151,69 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         if(id==R.id.tv_back){
             finish();
         }
+        else if(id==R.id.upload_pl){
+            uploadPinglun();
+        }
     }
+
+    private void uploadPinglun() {
+        String pl=et_pl.getText().toString();
+        if(pl==null||pl.equals("")){
+            Toast.makeText(DetailActivity.this,"请输入内容",Toast.LENGTH_LONG).show();
+            return;
+        }
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String rq = format.format(date);
+        boolean b = plsqlHelper.savePLInfo(this, userId, _id, pl,rq);
+        if (b){
+            Toast.makeText(DetailActivity.this,"发布成功",Toast.LENGTH_LONG).show();
+            et_pl.setText("");
+            myAdapter.updateDataList(plsqlHelper.queryPingLun(DetailActivity.this,_id));
+        }
+    }
+
+    class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
+
+
+        public void updateDataList(List<PingLunBean> newDataList ){
+            DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new MyPLDiffCallback(pllists, newDataList));
+            pllists.clear();
+            pllists.addAll(newDataList);
+            diffResult.dispatchUpdatesTo(this);
+        }
+        @NonNull
+        @Override
+        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = View.inflate(DetailActivity.this, R.layout.pinglun_list, null);
+            MyViewHolder holder = new MyViewHolder(view);
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+            PingLunBean pingLunBean = pllists.get(position);
+            holder.mAuthorTv.setText(sqlHelper.getUserName(DetailActivity.this,pingLunBean.getUserId()));
+            holder.mContnt.setText(pingLunBean.getContent());
+            holder.mdate.setText(pingLunBean.getRq());
+        }
+
+        @Override
+        public int getItemCount() {
+            return pllists.size();
+        }
+    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder{
+        private TextView mAuthorTv;
+        private TextView mContnt;
+        private TextView mdate;
+        public MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            mAuthorTv=itemView.findViewById(R.id.tv_pl_author);
+            mContnt=itemView.findViewById(R.id.tv_content);
+            mdate=itemView.findViewById(R.id.tv_rq);
+        }
+    }
+
 }
