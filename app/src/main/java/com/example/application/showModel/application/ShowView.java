@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.application.R;
+import com.example.application.serverutils.ServerUtils;
+import com.example.application.serverutils.utilsinterface.AsyncCallback;
 import com.example.application.showModel.callback.MyDiffCallback;
 import com.example.application.uploadModel.bean.FaBuBean;
 import com.example.application.uploadModel.sqlUtils.FaBuSQLHelper;
@@ -39,6 +41,7 @@ public class ShowView extends AppCompatActivity implements View.OnClickListener 
 
     private FaBuSQLHelper sqlHelper = new FaBuSQLHelper();
 
+    private ServerUtils serverUtils=new ServerUtils();
     public ShowView(Activity context) {
         mContext = context;
         layoutInflater = LayoutInflater.from(mContext);
@@ -55,9 +58,23 @@ public class ShowView extends AppCompatActivity implements View.OnClickListener 
         recyclerView = mCurrentView.findViewById(R.id.recyclerview);
         ib_search = mCurrentView.findViewById(R.id.search);
         tv_title = mCurrentView.findViewById(R.id.et_search_title);
-        List<FaBuBean> faBuBeans = sqlHelper.queryFaBuInfo(mContext, "");
-        lists.addAll(faBuBeans);
+        serverUtils.performAsyncOperation(new AsyncCallback() {
+            @Override
+            public void onSuccess(final List<FaBuBean> list) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        lists.addAll(list);
+                        myAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
 
+            @Override
+            public void onFailure(Throwable throwable) {
+
+            }
+        },"query","");
         myAdapter = new MyAdapter();
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(layoutManager);
@@ -93,8 +110,24 @@ public class ShowView extends AppCompatActivity implements View.OnClickListener 
         if (mCurrentView == null) {
             initView();
         } else {
-            List<FaBuBean> newDataLists = sqlHelper.queryFaBuInfo(mContext, "");
-            myAdapter.updateDataList(newDataLists);
+            serverUtils.performAsyncOperation(new AsyncCallback() {
+                @Override
+                public void onSuccess(final List<FaBuBean> list) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            lists.clear();
+                            lists.addAll(list);
+                            myAdapter.notifyDataSetChanged();
+                        }
+                    });
+                }
+
+                @Override
+                public void onFailure(Throwable throwable) {
+
+                }
+            },"query","");
             mCurrentView.setVisibility(View.VISIBLE);
         }
     }

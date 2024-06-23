@@ -198,11 +198,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
         if (upLoadView != null) {
-            final int takeFlags = data.getFlags()
-                    & (Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            getContentResolver().takePersistableUriPermission(data.getData(), takeFlags);
-            upLoadView.handleActivityResult(requestCode, resultCode, data);
+            if(data!=null){
+                final int takeFlags = data.getFlags()
+                        & (Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                getContentResolver().takePersistableUriPermission(data.getData(), takeFlags);
+                upLoadView.handleActivityResult(requestCode, resultCode, data);
+            }
+
         }
     }
 }

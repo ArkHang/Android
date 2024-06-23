@@ -2,6 +2,8 @@ package com.example.application.uploadModel.application;
 
 import static androidx.core.app.ActivityCompat.startActivityForResult;
 
+import static com.example.application.showModel.content.ServerContent.SERVER_URL;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -21,13 +23,31 @@ import android.widget.ToggleButton;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.application.R;
+import com.example.application.uploadModel.bean.FaBuBean;
 import com.example.application.uploadModel.intentutils.ActivityResultCallback;
 import com.example.application.uploadModel.sqlUtils.FaBuSQLHelper;
 import com.example.sqlite.SQLiteHelper;
 import com.example.utils.UtilsHelper;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+
+import org.json.JSONArray;
+import org.json.JSONStringer;
+
+import java.io.IOException;
+
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class UpLoadView extends AppCompatActivity implements View.OnClickListener{
 
@@ -108,6 +128,8 @@ public class UpLoadView extends AppCompatActivity implements View.OnClickListene
             initView();
         }
         mCurrentView.setVisibility(View.VISIBLE);
+
+
     }
     @Override
     public void onClick(View v) {
@@ -131,8 +153,10 @@ public class UpLoadView extends AppCompatActivity implements View.OnClickListene
         String keys = tv_key.getText().toString();
         String text = et_js.getText().toString();
         String str_uri=uri.toString();
+        long currentTimeMillis = System.currentTimeMillis();
+        int id= (int) (currentTimeMillis / 1000);
         try{
-            boolean b = sqlHelper.saveFaBuInfo(mContext, UtilsHelper.readUserId(mContext), title, keys, text, str_uri);
+            boolean b = sqlHelper.saveFaBuInfo(mContext, UtilsHelper.readUserId(mContext), title, keys, text, str_uri,id);
             if (b){
                 ed_title.setText("");
                 tv_key.setText("");
@@ -142,6 +166,30 @@ public class UpLoadView extends AppCompatActivity implements View.OnClickListene
                 for (int j=0;j< flags.length;j++){
                     flags[j]=false;
                 }
+
+                FaBuBean faBuBean = sqlHelper.findFaBuInfoByID(mContext, id);
+                Gson gson = new Gson();
+                String json = gson.toJson(faBuBean);
+                OkHttpClient client = new OkHttpClient();
+                RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), json);
+                Request build = new Request.Builder()
+                        .url(SERVER_URL+"insert")
+                        .post(body)
+                        .build();
+
+                client.newCall(build).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                        String s = response.body().toString();
+//                Toast.makeText(UpLoadView.this,s,Toast.LENGTH_LONG).show();
+                    }
+                });
+
                 Toast.makeText(mContext,"发布成功",Toast.LENGTH_LONG).show();
             }
             else {

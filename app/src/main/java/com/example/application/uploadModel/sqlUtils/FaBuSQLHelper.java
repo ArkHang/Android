@@ -18,7 +18,7 @@ import java.util.List;
 
 public class FaBuSQLHelper {
     public boolean saveFaBuInfo(Context context,Integer userID,String title,
-                                    String keys,String text,String uri){
+                                    String keys,String text,String uri,Integer id){
         SQLiteHelper dbHelper = new SQLiteHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -28,6 +28,7 @@ public class FaBuSQLHelper {
         values.put("atext",text);
         values.put("uri",uri);
 
+        values.put("_id",id);
         long l = db.insert(SQLiteHelper.U_FABUINFO, null, values);
         db.close();
         return l>0?true:false;
