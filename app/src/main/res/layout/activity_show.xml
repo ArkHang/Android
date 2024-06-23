@@ -9,47 +9,48 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        >
 
         <TextView
             style="@style/tvUserInfoStyle"
             android:layout_width="50dp"
             android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
             android:text="标 题:"
+            android:gravity="center"
             android:layout_gravity="center"></TextView>
+
         <EditText
-            android:textColor="@color/black"
-            android:layout_width="110dp"
-            android:layout_height="40dp"
             android:id="@+id/et_search_title"
-            android:layout_gravity="center"
-            ></EditText>
-        <TextView
-            style="@style/tvUserInfoStyle"
-            android:layout_width="60dp"
+            android:layout_width="296dp"
             android:layout_height="40dp"
-            android:text="关键字:"
-            android:layout_gravity="center"></TextView>
-        <EditText
-            android:textColor="@color/black"
-            android:layout_width="110dp"
-            android:layout_height="40dp"
-            android:id="@+id/et_search_keys"
             android:layout_gravity="center"
-            ></EditText>
+            android:background="@drawable/rounded_edittext"
+            android:paddingLeft="8dp"
+            android:textColor="@color/black"></EditText>
+
+
         <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="40dp"
             android:id="@+id/search"
+            android:layout_width="39dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"></ImageButton>
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/search"
+            android:paddingLeft="10dp"></ImageButton>
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:layout_marginBottom="55dp"
+        android:background="?android:attr/selectableItemBackground">
     </androidx.recyclerview.widget.RecyclerView>
+
 </LinearLayout>

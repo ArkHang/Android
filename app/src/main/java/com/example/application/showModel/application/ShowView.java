@@ -32,7 +32,7 @@ public class ShowView extends AppCompatActivity implements View.OnClickListener 
     private static Activity mContext;
     private View mCurrentView;
 
-    private EditText tv_title,tv_keys;
+    private EditText tv_title;
     private ImageButton ib_search;
     private LayoutInflater layoutInflater;
     private List<FaBuBean> lists=new ArrayList<FaBuBean>();
@@ -49,8 +49,7 @@ public class ShowView extends AppCompatActivity implements View.OnClickListener 
         recyclerView=mCurrentView.findViewById(R.id.recyclerview);
         ib_search=mCurrentView.findViewById(R.id.search);
         tv_title=mCurrentView.findViewById(R.id.et_search_title);
-        tv_keys=mCurrentView.findViewById(R.id.et_search_keys);
-        List<FaBuBean> faBuBeans = sqlHelper.queryFaBuInfo(mContext, "", "");
+        List<FaBuBean> faBuBeans = sqlHelper.queryFaBuInfo(mContext, "");
         for (FaBuBean bean: faBuBeans) {
             lists.add(bean);
         }
@@ -71,13 +70,12 @@ public class ShowView extends AppCompatActivity implements View.OnClickListener 
         int id=v.getId();
         if (id==R.id.search){
             String title = tv_title.getText().toString();
-            String keys = tv_keys.getText().toString();
-            selectList(title,keys);
+            selectList(title);
         }
     }
 
-    private void selectList(String title, String keys) {
-        List<FaBuBean> newDataLists = sqlHelper.queryFaBuInfo(mContext, title, keys);
+    private void selectList(String title) {
+        List<FaBuBean> newDataLists = sqlHelper.queryFaBuInfo(mContext, title);
         myAdapter.updateDataList(newDataLists);
 
     }
@@ -94,7 +92,7 @@ public class ShowView extends AppCompatActivity implements View.OnClickListener 
             initView();
         }
         else {
-            List<FaBuBean> newDataLists = sqlHelper.queryFaBuInfo(mContext, "", "");
+            List<FaBuBean> newDataLists = sqlHelper.queryFaBuInfo(mContext, "");
             myAdapter.updateDataList(newDataLists);
             mCurrentView.setVisibility(View.VISIBLE);
         }

@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout mBottomLayout;
     private View mCourseBtn, mExercisesBtn, mMyInfoBtn,uploadBtn;
     private TextView tv_course, tv_exercises, tv_myInfo,tv_upload;
-    private ImageView iv_course, iv_exercises, iv_myInfo;
+    private ImageView iv_course, iv_exercises, iv_myInfo,iv_upload;
     private MyInfoView mMyInfoView;
 
     private ShowView showView;
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         iv_course = findViewById(R.id.bottom_bar_image_course);
         iv_exercises = findViewById(R.id.bottom_bar_image_exercises);
         iv_myInfo = findViewById(R.id.bottom_bar_image_myinfo);
-
+        iv_upload = findViewById(R.id.bottom_bar_image_upload);
         // Default to not selected status
         setNotSelectedStatus();
     }
@@ -76,10 +76,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_course.setTextColor(getColor(R.color.text_color_deselected));
         tv_exercises.setTextColor(getColor(R.color.text_color_deselected));
         tv_myInfo.setTextColor(getColor(R.color.text_color_deselected));
+        tv_upload.setTextColor(getColor(R.color.text_color_deselected));
 
-        iv_course.setImageResource(R.drawable.main_course_icon);
-        iv_exercises.setImageResource(R.drawable.main_exercises_icon);
-        iv_myInfo.setImageResource(R.drawable.main_my_icon);
+        iv_course.setImageResource(R.drawable.home);
+        iv_exercises.setImageResource(R.drawable.button2);
+        iv_myInfo.setImageResource(R.drawable.mine);
+        iv_upload.setImageResource(R.drawable.button3);
 
         for (int i = 0; i < mBottomLayout.getChildCount(); i++) {
             mBottomLayout.getChildAt(i).setSelected(false);
@@ -91,22 +93,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (index) {
             case 0:
                 mCourseBtn.setSelected(true);
-                iv_course.setImageResource(R.drawable.main_course_icon_selected);
+                iv_course.setImageResource(R.drawable.home_select);
                 tv_course.setTextColor(getColor(R.color.text_color_selected));
                 break;
             case 1:
                 mExercisesBtn.setSelected(true);
-                iv_exercises.setImageResource(R.drawable.main_exercises_icon_selected);
+                iv_exercises.setImageResource(R.drawable.button2_select);
                 tv_exercises.setTextColor(getColor(R.color.text_color_selected));
                 break;
             case 2:
                 mMyInfoBtn.setSelected(true);
-                iv_myInfo.setImageResource(R.drawable.main_my_icon_selected);
+                iv_myInfo.setImageResource(R.drawable.mine_select);
                 tv_myInfo.setTextColor(getColor(R.color.text_color_selected));
                 break;
             case 3:
                 uploadBtn.setSelected(true);
-                tv_upload.setTextColor(R.drawable.main_course_icon_selected);
+                iv_upload.setImageResource(R.drawable.button3_select);
+                tv_upload.setTextColor(getColor(R.color.text_color_selected));
                 break;
         }
     }
