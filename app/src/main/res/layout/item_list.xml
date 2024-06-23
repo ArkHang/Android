@@ -9,29 +9,26 @@
     android:layout_marginBottom="16dp">
 
     <TextView
-
+        android:id="@+id/tv_zz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Author Name"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/tv_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_title" />
+    <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:text="Title Text" /> <!-- 示例文本 -->
-
-    <TextView
-        android:id="@+id/tv_zz"
-        app:layout_constraintStart_toEndOf="@+id/tv_title"
-        app:layout_constraintTop_toTopOf="@+id/tv_title"
-        android:layout_marginStart="200dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:text="Title Text" />
-
+        android:text="Title Text"
+        android:textSize="30dp"
+        android:textColor="@color/black" />
     <TextView
         android:id="@+id/tv_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:textColor="@color/black"
-        android:text="Author Text" /> <!-- 示例文本 -->
+        android:textColor="#8D8D8D"
+        android:text="Author Text" />
 
 </LinearLayout>
