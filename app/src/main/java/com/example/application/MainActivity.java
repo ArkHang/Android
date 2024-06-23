@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatCallback;
 
+import com.example.application.myshowModel.appliaction.MyShowView;
 import com.example.application.showModel.application.ShowView;
 import com.example.application.uploadModel.application.UpLoadView;
 import com.example.application.uploadModel.intentutils.ActivityResultCallback;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView iv_course, iv_exercises, iv_myInfo,iv_upload;
     private MyInfoView mMyInfoView;
 
+    private MyShowView myShowView;
     private ShowView showView;
     private UpLoadView upLoadView;
 
@@ -137,7 +139,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 showView.showView();
                 break;
             case 1:
-                // Load Exercises View
+                // Load Exercises
+                if (myShowView==null){
+                    myShowView=new MyShowView(this);
+                    mBodyLayout.addView(myShowView.getView());
+                }
+                myShowView.showView();
                 break;
             case 2:
                 // Load My Info View

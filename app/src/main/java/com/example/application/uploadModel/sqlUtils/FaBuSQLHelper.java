@@ -100,4 +100,12 @@ public class FaBuSQLHelper {
 
         return faBuBean;
     }
+
+    public boolean deleteById(Context context,Integer id){
+        SQLiteHelper sqLiteHelper = new SQLiteHelper(context);
+        SQLiteDatabase db = sqLiteHelper.getWritableDatabase();
+        String selection="_id=?";
+        int delete = db.delete(SQLiteHelper.U_FABUINFO, selection, new String[]{(id + "")});
+        return delete>0?true:false;
+    }
 }

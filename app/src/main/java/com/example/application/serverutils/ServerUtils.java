@@ -59,9 +59,12 @@ public class ServerUtils {
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.isSuccessful()) {
                     String jsons = response.body().string();
-                    Type type = new TypeToken<List<FaBuBean>>() {}.getType();
-                    final List<FaBuBean> faBuBeans = gson.fromJson(jsons, type);
-                    callback.onSuccess(faBuBeans);
+                    if(jsons!=null&&!jsons.equals("")){
+                        Type type = new TypeToken<List<FaBuBean>>() {}.getType();
+                        final List<FaBuBean> faBuBeans = gson.fromJson(jsons, type);
+                        callback.onSuccess(faBuBeans);
+                    }
+
                 } else {
                     // 在这里处理响应错误，例如回调onFailure方法
                 }

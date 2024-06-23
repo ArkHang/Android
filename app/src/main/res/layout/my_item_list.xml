@@ -14,20 +14,20 @@
         android:background="@drawable/rounded_background">
 
         <TextView
-            android:id="@+id/tv_zz"
+            android:id="@+id/tv_my_zz"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Author Name"
             android:textColor="@color/black" />
         <TextView
-            android:id="@+id/tv_title"
+            android:id="@+id/tv_my_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Title Text"
             android:textSize="30dp"
             android:textColor="@color/black" />
         <TextView
-            android:id="@+id/tv_author"
+            android:id="@+id/tv_my_keys"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -35,7 +35,7 @@
             android:text="Author Text" />
     </LinearLayout>
     <ImageView
-        android:id="@+id/iv_delete"
+        android:id="@+id/iv_my_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"

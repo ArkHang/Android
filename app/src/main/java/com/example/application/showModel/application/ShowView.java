@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -64,6 +65,7 @@ public class ShowView extends AppCompatActivity implements View.OnClickListener 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        lists.clear();
                         lists.addAll(list);
                         myAdapter.notifyDataSetChanged();
                     }
@@ -172,6 +174,7 @@ public class ShowView extends AppCompatActivity implements View.OnClickListener 
             FaBuBean faBuBean = lists.get(position);
             holder.mTitleTv.setText(faBuBean.getTitle());
             holder.mAuthorTv.setText(faBuBean.getKeys());
+            holder.mZZTV.setText(sqlHelper.getUserName(mContext,faBuBean.getUserId()));
         }
 
         @Override
