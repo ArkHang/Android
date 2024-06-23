@@ -41,6 +41,7 @@
         <activity android:name=".SecuritySettingActivity"/>
         <activity android:name=".uploadModel.application.UpLoadView"></activity>
         <activity android:name=".showModel.application.DetailActivity"></activity>
+        <activity android:name=".myshowModel.appliaction.NotificationActivity"></activity>
     </application>
 
 </manifest>

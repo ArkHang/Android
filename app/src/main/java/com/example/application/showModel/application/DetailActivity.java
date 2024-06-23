@@ -153,7 +153,17 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         }
         else if(id==R.id.upload_pl){
             uploadPinglun();
+
         }
+    }
+
+    private void insertNotification(String rq) {
+        FaBuBean faBuBean = sqlHelper.findFaBuInfoByID(this, _id);
+        String string="";
+        String userName = sqlHelper.getUserName(this, userId);
+        string="["+userName+"]"+"评论了["+faBuBean.getTitle()+"]!";
+        plsqlHelper.saveNotification(this,faBuBean.getUserId(),string,rq);
+
     }
 
     private void uploadPinglun() {
@@ -170,6 +180,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(DetailActivity.this,"发布成功",Toast.LENGTH_LONG).show();
             et_pl.setText("");
             myAdapter.updateDataList(plsqlHelper.queryPingLun(DetailActivity.this,_id));
+            insertNotification(rq);
         }
     }
 

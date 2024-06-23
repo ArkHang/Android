@@ -9,6 +9,7 @@ import android.view.ContentInfo;
 
 import androidx.core.app.NavUtils;
 
+import com.example.application.showModel.bean.Notification;
 import com.example.application.showModel.bean.PingLunBean;
 import com.example.sqlite.SQLiteHelper;
 
@@ -49,5 +50,36 @@ public class PLSQLHelper {
         cursor.close();
         db.close();
         return results.size()==0?new ArrayList<>():results;
+    }
+
+    public void saveNotification(Context context,Integer userid,String content,String rq){
+        SQLiteHelper helper = new SQLiteHelper(context);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("AUTHORID",userid);
+        values.put("CONTENT",content);
+        values.put("RQ",rq);
+        db.insert(SQLiteHelper.U_NOTIFICATION,null,values);
+    }
+
+    @SuppressLint("Range")
+    public List<Notification> queryNotificationByAuthorId(Context context, Integer authorid){
+        SQLiteHelper dbHelper = new SQLiteHelper(context);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selection="AUTHORID=?";
+        Cursor cursor = db.query(SQLiteHelper.U_NOTIFICATION, null, selection, new String[]{(authorid + "")}, null, null, "RQ DESC");
+        List<Notification> result=new ArrayList<>();
+        if (cursor.moveToFirst()){
+            do{
+                Notification notification = new Notification(cursor.getInt(cursor.getColumnIndex("_id")),
+                        cursor.getInt(cursor.getColumnIndex("AUTHORID")),
+                        cursor.getString(cursor.getColumnIndex("CONTENT")),
+                        cursor.getString(cursor.getColumnIndex("RQ")));
+                result.add(notification);
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return result.size()==0?new ArrayList<>():result;
     }
 }

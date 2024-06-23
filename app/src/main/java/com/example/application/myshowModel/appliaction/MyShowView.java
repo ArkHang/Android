@@ -3,6 +3,7 @@ package com.example.application.myshowModel.appliaction;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.application.R;
 import com.example.application.serverutils.ServerUtils;
 import com.example.application.serverutils.utilsinterface.AsyncCallback;
+import com.example.application.showModel.application.DetailActivity;
 import com.example.application.uploadModel.bean.FaBuBean;
 import com.example.application.uploadModel.sqlUtils.FaBuSQLHelper;
 import com.example.utils.UtilsHelper;
@@ -127,7 +129,9 @@ public class MyShowView extends AppCompatActivity implements View.OnClickListene
                 @Override
                 public void onClick(View v) {
                     int adapterPosition = holder.getAdapterPosition();
-
+                    Intent intent = new Intent(mContext, DetailActivity.class);
+                    intent.putExtra("EXTRA_DATA",lists.get(adapterPosition).get_id());
+                    mContext.startActivity(intent);
                 }
             });
             return holder;

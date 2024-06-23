@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_background"
+    android:orientation="vertical"
+    android:padding="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="16dp">
+
+    <TextView
+        android:id="@+id/tv_noti_rq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Author Name"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/tv_noti_content"
+        app:layout_constraintTop_toTopOf="@+id/tv_noti_content" />
+    <TextView
+        android:id="@+id/tv_noti_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Title Text"
+        android:textSize="30dp"
+        android:textColor="@color/black" />
+
+
+</LinearLayout>

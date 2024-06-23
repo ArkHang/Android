@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.application.myshowModel.appliaction.NotificationActivity;
 import com.example.utils.UtilsHelper;
 
 public class MyInfoView implements View.OnClickListener {
@@ -93,6 +94,9 @@ public class MyInfoView implements View.OnClickListener {
             }
         } else if (viewId == R.id.rl_course_history) {
             if (UtilsHelper.readLoginStatus(mContext)) {
+                Intent intent = new Intent(mContext, NotificationActivity.class);
+                intent.putExtra("EXTRA_DATA", UtilsHelper.readUserId(mContext));
+                mContext.startActivity(intent);
 
             } else {
                 Toast.makeText(mContext, "您还未登录，请先登录", Toast.LENGTH_SHORT).show();
