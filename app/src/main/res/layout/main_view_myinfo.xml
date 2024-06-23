@@ -3,14 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFF"
+    android:background="@drawable/rounded_top"
     android:id="@+id/my_info_view_container">
 
     <LinearLayout
         android:id="@+id/ll_head"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/rounded_top"
+        >
 
         <ImageView
             android:id="@+id/iv_head_icon"
@@ -36,39 +38,61 @@
         style="@style/vMyinfoStyle"
         android:layout_marginTop="20dp" />
 
-    <RelativeLayout
-        android:id="@+id/rl_course_history"
-        style="@style/rlMyinfoStyle">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
 
-        <ImageView
-            android:id="@+id/iv_course_historyicon"
-            style="@style/ivMyinfoLeftStyle"
-            android:src="@drawable/course_history_icon" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/circular_saw_background"
+            android:orientation="vertical"
+            android:padding="8dp">
 
-        <TextView
-            style="@style/tvMyinfoStyle"
-            android:layout_toRightOf="@id/iv_course_historyicon"
-            android:text="播放记录" />
+            <RelativeLayout
+                android:id="@+id/rl_course_history"
+                style="@style/rlMyinfoStyle">
 
-        <ImageView style="@style/ivMyinfoRightStyle" />
-    </RelativeLayout>
+                <ImageView
+                    android:id="@+id/iv_course_historyicon"
+                    style="@style/ivMyinfoLeftStyle"
+                    android:src="@drawable/course_history_icon" />
 
-    <View style="@style/vMyinfoStyle" />
+                <TextView
+                    style="@style/tvMyinfoStyle"
+                    android:layout_toRightOf="@id/iv_course_historyicon"
+                    android:text="浏览记录" />
 
-    <RelativeLayout
-        android:id="@+id/rl_setting"
-        style="@style/rlMyinfoStyle">
+                <ImageView
+                    android:id="@+id/iv_right_course_history"
+                    style="@style/ivMyinfoRightStyle" />
+            </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/iv_userinfo_icon"
-            style="@style/ivMyinfoLeftStyle"
-            android:src="@drawable/myinfo_setting_icon" />
+            <RelativeLayout
+                android:id="@+id/rl_setting"
+                style="@style/rlMyinfoStyle">
 
-        <TextView
-            style="@style/tvMyinfoStyle"
-            android:layout_toRightOf="@id/iv_userinfo_icon"
-            android:text="设置" />
+                <ImageView
+                    android:id="@+id/iv_userinfo_icon"
+                    style="@style/ivMyinfoLeftStyle"
+                    android:src="@drawable/myinfo_setting_icon" />
 
-        <ImageView style="@style/ivMyinfoRightStyle" />
-    </RelativeLayout>
+                <TextView
+                    style="@style/tvMyinfoStyle"
+                    android:layout_toRightOf="@id/iv_userinfo_icon"
+                    android:text="设置" />
+
+                <ImageView
+                    android:id="@+id/iv_right_setting"
+                    style="@style/ivMyinfoRightStyle" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 </LinearLayout>

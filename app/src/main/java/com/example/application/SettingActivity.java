@@ -31,7 +31,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         tv_main_title.setText("设置");
         tv_back = findViewById(R.id.tv_back);
         rl_title_bar = findViewById(R.id.title_bar);
-        rl_title_bar.setBackgroundColor(Color.parseColor("#30B4FF"));
+        rl_title_bar.setBackgroundColor(Color.parseColor("#00000000"));
+
 
         rl_modify_psw = findViewById(R.id.rl_modify_psw);
         rl_security_setting = findViewById(R.id.rl_security_setting);

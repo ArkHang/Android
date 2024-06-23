@@ -45,7 +45,7 @@ public class UpLoadView extends AppCompatActivity implements View.OnClickListene
     private TextView tv_key;
     private LayoutInflater layoutInflater;
 
-    private Button uploadbtn,commitBtn,canclebtn;
+    private Button uploadbtn,commitBtn;
 
     private boolean[] flags=new boolean[8];
 
@@ -79,7 +79,6 @@ public class UpLoadView extends AppCompatActivity implements View.OnClickListene
         tv_key = mCurrentView.findViewById(R.id.tv_keySelected);
         et_js=mCurrentView.findViewById(R.id.et_js);
         uploadbtn=mCurrentView.findViewById(R.id.upload_vedio);
-        canclebtn=mCurrentView.findViewById(R.id.upload_vedio_cancle);
         iv=mCurrentView.findViewById(R.id.iv);
         commitBtn=mCurrentView.findViewById(R.id.commit);
         setListener();
@@ -93,7 +92,6 @@ public class UpLoadView extends AppCompatActivity implements View.OnClickListene
         }
         uploadbtn.setOnClickListener(this);
         commitBtn.setOnClickListener(this);
-        canclebtn.setOnClickListener(this);
 
     }
     public View getView() {
@@ -125,10 +123,6 @@ public class UpLoadView extends AppCompatActivity implements View.OnClickListene
         }
         if (id==R.id.commit){
             uploadInfo();
-        }
-        if(id==R.id.upload_vedio_cancle){
-            uri=null;
-            iv.setImageURI(null);
         }
     }
 

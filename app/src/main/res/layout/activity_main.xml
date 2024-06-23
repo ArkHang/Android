@@ -6,23 +6,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#FFFFFF"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/backgroundcolor"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <include layout="@layout/main_title_bar" />
 
             <FrameLayout
                 android:id="@+id/main_body"
                 android:layout_width="match_parent"
-                android:layout_height="620dp" />
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_top"/> <!-- 使用自定义的圆角背景 -->
+
         </LinearLayout>
 
         <LinearLayout
@@ -30,65 +34,109 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_alignParentBottom="true"
-            android:orientation="horizontal"
-            android:background="#F2F2F2">
+            android:background="#F2F2F4">
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/bottom_bar_course_btn"
-                style="@style/rlBottomStyle">
-                <TextView
-                    android:id="@+id/bottom_bar_text_course"
-                    style="@style/tvBottomStyle"
-                    android:text="视频" />
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
                 <ImageView
                     android:id="@+id/bottom_bar_image_course"
-                    style="@style/ivBottomStyle"
-                    android:src="@drawable/main_course_icon" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/bottom_bar_exercises_btn"
-                style="@style/rlBottomStyle">
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/home" />
                 <TextView
-                    android:id="@+id/bottom_bar_text_exercises"
-                    style="@style/tvBottomStyle"
-                    android:text="习题" />
+                    android:id="@+id/bottom_bar_text_course"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:text="首页" />
+            </LinearLayout>
 
+
+            <LinearLayout
+                android:id="@+id/bottom_bar_exercises_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
                 <ImageView
                     android:id="@+id/bottom_bar_image_exercises"
-                    style="@style/ivBottomStyle"
-                    android:src="@drawable/main_exercises_icon" />
-            </RelativeLayout>
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/button2" />
 
-            <RelativeLayout
-                android:id="@+id/bottom_bar_upload"
-                style="@style/rlBottomStyle">
                 <TextView
-                    android:id="@+id/bottom_bar_upload1"
-                    style="@style/tvBottomStyle"
-                    android:text="上传" />
+                    android:id="@+id/bottom_bar_text_exercises"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:text="动态" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bottom_bar_upload"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
                 <ImageView
                     android:id="@+id/bottom_bar_image_upload"
-                    style="@style/ivBottomStyle"
-                    android:src="@drawable/main_my_icon" />
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/button3" />
 
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:id="@+id/bottom_bar_myinfo_btn"
-                style="@style/rlBottomStyle">
                 <TextView
-                    android:id="@+id/bottom_bar_text_myinfo"
-                    style="@style/tvBottomStyle"
-                    android:text="我" />
+                    android:id="@+id/bottom_bar_upload1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:text="发帖" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/bottom_bar_myinfo_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
                 <ImageView
                     android:id="@+id/bottom_bar_image_myinfo"
-                    style="@style/ivBottomStyle"
-                    android:src="@drawable/main_my_icon" />
-            </RelativeLayout>
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/button4" />
+                <TextView
+                    android:id="@+id/bottom_bar_text_myinfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:text="我的" />
+            </LinearLayout>
+
         </LinearLayout>
     </RelativeLayout>
+
+
     <TextView
         android:id="@+id/welcome_text"
         android:layout_width="wrap_content"

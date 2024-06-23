@@ -10,4 +10,8 @@
     <color name="text_color_deselected">#666666</color> <!-- 灰色，未选中时的颜色 -->
     <color name="text_color_selected">#0097F7</color> <!-- 蓝色，选中时的颜色 -->
     <color name="gray">#C0C0C0</color>
+
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorOnSurface">#9E9E9E</color>
+
 </resources>

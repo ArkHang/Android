@@ -33,7 +33,7 @@ public class FaBuSQLHelper {
         return l>0?true:false;
     }
 
-    public  List<FaBuBean> queryFaBuInfo(Context context,String title,String keys){
+    public  List<FaBuBean> queryFaBuInfo(Context context,String title){
         SQLiteHelper sqLiteHelper = new SQLiteHelper(context);
         SQLiteDatabase db = sqLiteHelper.getReadableDatabase();
 
@@ -44,18 +44,7 @@ public class FaBuSQLHelper {
             selection += "AND TITLE LIKE ?";
             argsList.add("%"+title+"%");
         }
-        if(keys!=null&&!"".equals(keys)){
-            String[] s = keys.split(" ");
-            List<String> keyList = Arrays.asList(s);
-            for(int i=0;i<keyList.size();i++){
-                selection+="AND KEYS LIKE ? ";
-                argsList.add("%"+keyList.get(i)+"%");
-            }
-//            String joinSelection = TextUtils.join(", ", Collections.nCopies(keyList.size(), "?"));
-//            selection+="AND KEYS IN ("+joinSelection+")";
-//            argsList.addAll(keyList);
 
-        }
 //        selection+="AND KEYS IN (?)";
 //        argsList.add("学习 鬼畜");
         String[] selectArgs=new String[argsList.size()];

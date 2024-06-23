@@ -1,52 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:background="@drawable/backgroundcolor"
 
-    <include layout="@layout/main_title_bar" />
+    >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/main_title_bar" />
+    </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rounded_top"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/circular_saw_background"
+            android:orientation="vertical"
+            android:padding="8dp">
+            <RelativeLayout
+                android:id="@+id/rl_modify_psw"
+                style="@style/rlMyinfoStyle">
+                <TextView
+                    style="@style/tvMyinfoStyle"
+                    android:text="修改密码" />
+                <ImageView
+                    style="@style/ivMyinfoRightStyle" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rl_security_setting"
+                style="@style/rlMyinfoStyle">
+                <TextView
+                    style="@style/tvMyinfoStyle"
+                    android:text="设置密保" />
+                <ImageView
+                    style="@style/ivMyinfoRightStyle" />
+            </RelativeLayout>
+        </LinearLayout>
 
-    <View
-        style="@style/vMyinfoStyle"
-        android:layout_marginTop="15dp" />
 
-    <RelativeLayout
-        android:id="@+id/rl_modify_psw"
-        style="@style/rlMyinfoStyle">
-        <TextView
-            style="@style/tvMyinfoStyle"
-            android:text="修改密码" />
-        <ImageView
-            style="@style/ivMyinfoRightStyle" />
-    </RelativeLayout>
-
-    <View style="@style/vMyinfoStyle" />
-
-    <RelativeLayout
-        android:id="@+id/rl_security_setting"
-        style="@style/rlMyinfoStyle">
-        <TextView
-            style="@style/tvMyinfoStyle"
-            android:text="设置密保" />
-        <ImageView
-            style="@style/ivMyinfoRightStyle" />
-    </RelativeLayout>
-
-    <View style="@style/vMyinfoStyle" />
-
-    <View
-        style="@style/vMyinfoStyle"
-        android:layout_marginTop="15dp" />
-
-    <RelativeLayout
-        android:id="@+id/rl_exit_login"
-        style="@style/rlMyinfoStyle">
-        <TextView
-            style="@style/tvMyinfoStyle"
-            android:text="退出登录" />
-    </RelativeLayout>
-
-    <View style="@style/vMyinfoStyle" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/circular_saw_background"
+            android:orientation="vertical"
+            android:padding="8dp">
+            <RelativeLayout
+                android:id="@+id/rl_exit_login"
+                style="@style/rlMyinfoStyle">
+                <TextView
+                    style="@style/tvMyinfoStyle"
+                    android:text="退出登录"
+                    android:textColor="#FF0000"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
