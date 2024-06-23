@@ -98,7 +98,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private void showEditDialog(String title, TextView textView, String field) {
         LayoutInflater inflater = LayoutInflater.from(this);
         View dialogView = inflater.inflate(R.layout.dialog_edit_text, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomDialogStyle); // 应用自定义样式
         builder.setTitle(title);
         builder.setView(dialogView);
 

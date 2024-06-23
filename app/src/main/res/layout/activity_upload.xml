@@ -23,6 +23,7 @@
                 style="@style/RoundedButton"
                 android:layout_width="55dp"
                 android:layout_height="30dp"
+                android:layout_marginTop="16dp"
                 android:layout_gravity="right"
                 android:text="发布"></Button>
 
@@ -47,8 +48,8 @@
                     android:layout_marginTop="10dp"
                     android:textColor="@color/black"
                     android:hint="请输入名称"
-                    android:textColorHint="@color/black"
-                    ></EditText>
+                    android:textColorHint="#8a8a8a"
+                    android:background="@drawable/edittext_border" />
             </LinearLayout>
 
         <LinearLayout
@@ -68,7 +69,8 @@
                 android:id="@+id/tv_keySelected"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:gravity="center"></TextView>
+                android:gravity="center"
+                android:background="@drawable/edittext_border"></TextView>
         </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -180,7 +182,8 @@
                 android:maxLines="10"
                 android:scrollbars="vertical"
                 android:textColor="@color/black"
-                android:textColorHint="@color/black"></EditText>
+                android:textColorHint="#8a8a8a"
+                android:background="@drawable/edittext_border"></EditText>
 
             <LinearLayout
                 android:layout_width="match_parent"
