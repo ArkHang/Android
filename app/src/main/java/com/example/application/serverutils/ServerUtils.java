@@ -8,13 +8,16 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.application.serverutils.utilsinterface.AsyncCallback;
+import com.example.application.showModel.bean.ParamArgu;
 import com.example.application.uploadModel.bean.FaBuBean;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -29,7 +32,19 @@ public class ServerUtils {
     private OkHttpClient client=new OkHttpClient();
     private Gson gson=new Gson();
     public void performAsyncOperation(final AsyncCallback callback,String method,String param){
-        RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), param);
+        RequestBody body;
+        ParamArgu argu = new ParamArgu();
+        if (param!=null&&!param.equals("")){
+
+            argu.setParam(param);
+            String json = gson.toJson(argu);
+            body = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), json);
+        }
+      else{
+          argu.setParam("");
+          String json = gson.toJson(argu);
+          body=RequestBody.create(MediaType.parse("application/json;charset=utf-8"),json);
+        }
         Request build = new Request.Builder()
                 .url(SERVER_URL + method)
                 .post(body)

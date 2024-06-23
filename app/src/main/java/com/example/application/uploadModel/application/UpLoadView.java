@@ -28,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.application.R;
 import com.example.application.uploadModel.bean.FaBuBean;
+import com.example.application.uploadModel.bean.InsertParam;
 import com.example.application.uploadModel.intentutils.ActivityResultCallback;
 import com.example.application.uploadModel.sqlUtils.FaBuSQLHelper;
 import com.example.sqlite.SQLiteHelper;
@@ -169,7 +170,8 @@ public class UpLoadView extends AppCompatActivity implements View.OnClickListene
 
                 FaBuBean faBuBean = sqlHelper.findFaBuInfoByID(mContext, id);
                 Gson gson = new Gson();
-                String json = gson.toJson(faBuBean);
+                InsertParam insertParam = new InsertParam(faBuBean, sqlHelper.getUserName(mContext, faBuBean.getUserId()));
+                String json = gson.toJson(insertParam);
                 OkHttpClient client = new OkHttpClient();
                 RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), json);
                 Request build = new Request.Builder()

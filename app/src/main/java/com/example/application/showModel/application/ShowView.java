@@ -95,8 +95,24 @@ public class ShowView extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void selectList(String title) {
-        List<FaBuBean> newDataLists = sqlHelper.queryFaBuInfo(mContext, title);
-        myAdapter.updateDataList(newDataLists);
+        serverUtils.performAsyncOperation(new AsyncCallback() {
+            @Override
+            public void onSuccess(final List<FaBuBean> list) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        lists.clear();
+                        lists.addAll(list);
+                        myAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+
+            }
+        },"query",title);
     }
 
     public View getView() {
@@ -175,10 +191,13 @@ public class ShowView extends AppCompatActivity implements View.OnClickListener 
         private TextView mTitleTv;
         private TextView mAuthorTv;
 
+        private TextView mZZTV;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             mTitleTv = itemView.findViewById(R.id.tv_title);
             mAuthorTv = itemView.findViewById(R.id.tv_author);
+            mZZTV=itemView.findViewById(R.id.tv_zz);
         }
     }
 }
