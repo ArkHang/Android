@@ -1,139 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    >
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#F2F2F4"
-    >
-    <include layout="@layout/main_title_bar"></include>
+    android:background="@drawable/backgroundcolor">
 
-    <LinearLayout
+    <!-- 固定在顶部的标题栏 -->
+    <include
+        android:id="@+id/title_bar"
+        layout="@layout/main_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:text="作 者:"
-            android:gravity="center"
-            style="@style/tvUserInfoStyle"
-            ></TextView>
-        <TextView
+        android:layout_alignParentTop="true" />
+
+    <!-- 可滚动的内容区 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_bar"
+        android:background="#F2F2F4"
+        android:layout_above="@+id/comment_area">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/tv_show_author"
-            android:gravity="center"
-            style="@style/tvUserInfoStyle"></TextView>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#F2F2F4"
+            android:padding="16dp">
+
+            <!-- 作 者: -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:text="作 者:"
+                    android:gravity="center"
+                    style="@style/tvUserInfoStyle" />
+                <TextView
+                    android:id="@+id/tv_show_author"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:background="@drawable/edittext_border"
+                    style="@style/tvUserInfoStyle" />
+            </LinearLayout>
+
+            <!-- 名 称: -->
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:text="名 称:"
+                    android:gravity="center"
+                    style="@style/tvUserInfoStyle" />
+                <TextView
+                    android:id="@+id/tv_show_tittle"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edittext_border"
+                    android:gravity="center"
+                    style="@style/tvUserInfoStyle" />
+            </LinearLayout>
+
+            <!-- 标 签: -->
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:text="标 签:"
+                    android:gravity="center"
+                    style="@style/tvUserInfoStyle" />
+                <TextView
+                    android:id="@+id/tv_show_keys"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/edittext_border"
+                    android:gravity="center"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <!-- 图片 -->
+            <ImageView
+                android:id="@+id/iv_show"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:layout_marginTop="4dp"
+                android:layout_gravity="center" />
+
+            <!-- 内 容 -->
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:text="内 容"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                style="@style/tvUserInfoStyle" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_show_js"
+                android:scrollbars="vertical"
+                style="@style/tvUserInfoStyle" />
+
+            <!-- 评 论 -->
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:text="评 论"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                style="@style/tvUserInfoStyle" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/show_recyclervoew" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- 固定在底部的评论输入区 -->
     <LinearLayout
-        android:layout_marginTop="5dp"
+        android:id="@+id/comment_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center">
-
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:text="名 称:"
-            android:gravity="center"
-            style="@style/tvUserInfoStyle"
-           ></TextView>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/tv_show_tittle"
-            style="@style/tvUserInfoStyle"
-            android:gravity="center"></TextView>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:text="关键字:"
-            android:gravity="center"
-            style="@style/tvUserInfoStyle"></TextView>
-
-        <TextView
+        android:gravity="center"
+        android:background="#F2F2F4"
+        android:paddingBottom="4dp"
+        android:layout_alignParentBottom="true">
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="40dp"
             android:textColor="@color/black"
-            android:id="@+id/tv_show_keys"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"></TextView>
-    </LinearLayout>
-
-    <ImageView
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
-        android:layout_width="350dp"
-        android:layout_height="170dp"
-        android:id="@+id/iv_show"
-        android:layout_gravity="center"
-        ></ImageView>
-    <TextView
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:text="简  述"
-        android:gravity="center"
-        android:layout_marginTop="5dp"
-        style="@style/tvUserInfoStyle"></TextView>
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/tv_show_js"
-    android:scrollbars="vertical"
-    style="@style/tvUserInfoStyle"></TextView>
-
-    <TextView
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:text="评 论"
-        android:gravity="center"
-        android:layout_marginTop="5dp"
-        style="@style/tvUserInfoStyle"></TextView>
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/show_recyclervoew">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:textColor="@color/black"
-        android:id="@+id/et_pl"
-        android:hint="请输入评论"
-        ></EditText>
+            android:id="@+id/et_pl"
+            android:hint="请输入评论"
+            android:textColorHint="#8a8a8a"
+            android:background="@drawable/edittext_border" />
         <Button
-            android:layout_marginLeft="20dp"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:textColor="@color/black"
+            android:id="@+id/upload_pl"
+            style="@style/RoundedButton"
+            android:layout_width="64dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
             android:text="发布"
-            android:id="@+id/upload_pl"></Button>
-</LinearLayout>
-</LinearLayout>
-</ScrollView>
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+</RelativeLayout>

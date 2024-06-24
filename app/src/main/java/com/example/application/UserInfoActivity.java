@@ -8,7 +8,10 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -86,38 +89,63 @@ public class UserInfoActivity extends AppCompatActivity {
     private void editSex() {
         final String[] options = {"男性", "女性", "其他"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("选择性别");
-        builder.setItems(options, (dialog, which) -> {
-            tv_sex.setText(options[which]);
-            dbUtils.updateUserInfo("sex", options[which], spUserName);
-            showToast("性别更新为：" + options[which]);
+
+        // 使用自定义布局文件
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_sex_selector, null);
+        builder.setView(dialogView);
+
+        AlertDialog dialog = builder.create();
+
+        ListView listView = dialogView.findViewById(R.id.sex_options_list);
+        // 使用自定义的列表项布局
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_item_myview, R.id.textView, options);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            tv_sex.setText(options[position]);
+            dbUtils.updateUserInfo("sex", options[position], spUserName);
+            showToast("性别更新为：" + options[position]);
+            dialog.dismiss();  // 使用对话框实例来关闭对话框
         });
-        builder.show();
+
+        dialog.show();
     }
+
+
 
     private void showEditDialog(String title, TextView textView, String field) {
         LayoutInflater inflater = LayoutInflater.from(this);
         View dialogView = inflater.inflate(R.layout.dialog_edit_text, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomDialogStyle); // 应用自定义样式
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomDialogStyle);
         builder.setTitle(title);
         builder.setView(dialogView);
 
         final EditText input = dialogView.findViewById(R.id.editTextDialogUserInput);
         input.setText(textView.getText());
 
-        builder.setPositiveButton("确定", (dialog, which) -> {
+        // 创建对话框但不显示
+        AlertDialog dialog = builder.create();
+
+        final Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
+        final Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+
+        buttonConfirm.setOnClickListener(v -> {
             String newValue = input.getText().toString();
             if (!TextUtils.isEmpty(newValue)) {
                 dbUtils.updateUserInfo(field, newValue, spUserName);
                 textView.setText(newValue);
                 showToast(title + "已更新为：" + newValue);
             }
+            dialog.dismiss();  // 确保在这里调用 dismiss 来关闭对话框
         });
 
-        builder.setNegativeButton("取消", (dialog, which) -> dialog.cancel());
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        buttonCancel.setOnClickListener(v -> dialog.cancel());
+
+        dialog.show();  // 最后显示对话框
     }
+
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

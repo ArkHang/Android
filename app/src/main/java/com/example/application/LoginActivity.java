@@ -93,13 +93,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Toast.makeText(this, "登录成功，欢迎 " + userName + "！", Toast.LENGTH_LONG).show();
         UtilsHelper.saveLoginStatus(this, true, userName);
 
-        Intent data = new Intent();
-        data.putExtra("isLogin", true);
-        data.putExtra("userName", userName);
-
-        //lMyInfoView.updateUI();
-        setResult(RESULT_OK, data);
-        finish();
+        // 启动 MainActivity
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.putExtra("isLogin", true);
+        intent.putExtra("userName", userName);
+        startActivity(intent);
+        finish();  // 结束当前的 LoginActivity
     }
+
 }
 

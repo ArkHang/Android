@@ -41,15 +41,16 @@
                     android:text="标 题:"
                     style="@style/tvUserInfoStyle"
                     android:gravity="center"></TextView>
+
                 <EditText
                     android:id="@+id/video_name"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/black"
+                    android:background="@drawable/edittext_border"
                     android:hint="请输入名称"
-                    android:textColorHint="#8a8a8a"
-                    android:background="@drawable/edittext_border" />
+                    android:textColor="@color/black"
+                    android:textColorHint="#8a8a8a" />
             </LinearLayout>
 
         <LinearLayout

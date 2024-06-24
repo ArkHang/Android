@@ -10,5 +10,55 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:hint="输入内容" />
+        android:textColor="@color/black"
+        android:hint="输入内容"
+        android:textColorHint="#8a8a8a"/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <!-- Left LinearLayout for Cancel button -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:padding="8dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/buttonCancel"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button_cancel_rounded"
+                android:text="取消"
+                android:textSize="18dp"
+                android:textColor="#95B923"/>
+        </LinearLayout>
+
+        <!-- Right LinearLayout for Confirm button -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:padding="8dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/buttonConfirm"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button_green_rounded"
+                android:textSize="18dp"
+                android:text="确定"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
 </LinearLayout>

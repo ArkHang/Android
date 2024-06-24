@@ -61,12 +61,12 @@
                 <ImageView
                     android:id="@+id/iv_course_historyicon"
                     style="@style/ivMyinfoLeftStyle"
-                    android:src="@drawable/course_history_icon" />
+                    android:src="@drawable/notification" />
 
                 <TextView
                     style="@style/tvMyinfoStyle"
                     android:layout_toRightOf="@id/iv_course_historyicon"
-                    android:text="浏览记录" />
+                    android:text="消息" />
 
                 <ImageView
                     android:id="@+id/iv_right_course_history"

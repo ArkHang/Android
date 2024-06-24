@@ -57,13 +57,15 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             Intent intent = new Intent(this, SecuritySettingActivity.class);
             startActivity(intent);
         } else if (id == R.id.rl_exit_login) {
-            UtilsHelper.clearLoginStatus(this);
-            Intent data = new Intent();
-            setResult(RESULT_OK, data);
+            UtilsHelper.clearLoginStatus(this); // 清除登录状态
 
-            data.putExtra("isLogin", false);
-            //sMyInfoView.updateUI();
-            finish();
+            // 创建 Intent 来启动 MainActivity
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK); // 清除此任务栈并启动新任务
+            intent.putExtra("isLogin", false); // 传递登录状态
+            startActivity(intent); // 启动 MainActivity
+            finish(); // 结束当前 Activity
         }
     }
+
 }

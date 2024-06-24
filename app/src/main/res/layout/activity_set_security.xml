@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/login_bg">
+    android:background="@drawable/background2">
 
     <include layout="@layout/main_title_bar" />
 
@@ -12,11 +12,14 @@
     <TextView
         style="@style/tvFindPswStyle"
         android:text="您的姓名是？"
+        android:textColor="@color/black"
         android:layout_marginTop="15dp" />
 
     <EditText
         android:id="@+id/et_validate_name"
         style="@style/etRegisterStyle"
+
+        android:background="@drawable/edittext_border"
         android:hint="请输入您的姓名"
         android:layout_marginTop="10dp" />
 

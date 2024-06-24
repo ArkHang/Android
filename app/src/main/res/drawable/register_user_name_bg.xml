@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"> <!-- 设为矩形，通过 corners 设为椭圆形 -->
+    <solid android:color="#80FFFFFF"/> <!-- 半透明白色, 80 为透明度 -->
+    <corners android:radius="30dp"/> <!-- 较大的半径使边角更圆滑 -->
+</shape>

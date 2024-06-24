@@ -61,6 +61,7 @@
                     style="@style/tvValueUserInfoStyle"/>
             </RelativeLayout>
             <View style="@style/vMyinfoStyle"/>
+
             <!-- 性别 -->
             <RelativeLayout
                 android:id="@+id/rl_sex"
@@ -72,6 +73,7 @@
                     android:id="@+id/tv_sex"
                     style="@style/tvValueUserInfoStyle"/>
             </RelativeLayout>
+
             <View style="@style/vMyinfoStyle"/>
             <!-- 签名 -->
             <RelativeLayout
